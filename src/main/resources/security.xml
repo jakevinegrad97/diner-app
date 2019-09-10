@@ -1,0 +1,37 @@
+<beans:beans
+xmlns:beans="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:p="http://www.springframework.org/schema/p"
+xmlns="http://www.springframework.org/schema/security"
+xsi:schemaLocation=
+"http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security-4.2.xsd
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+	<http auto-config="true" use-expressions="true">
+		<intercept-url pattern="/hello" access="hasRole('ROLE_USER')"/>
+		<logout logout-success-url="/logmeout" logout-url="/logout" delete-cookies="JSESSIONID"/>
+		<intercept-url pattern="/logout" access="permitAll"/>
+		<access-denied-handler error-page="/403"/>
+		<intercept-url pattern="/403" access="permitAll"/>
+	</http>
+	
+	<authentication-manager>
+		<authentication-provider>
+			<password-encoder hash="bcrypt"/>
+			<jdbc-user-service data-source-ref="dataSource"/>
+		</authentication-provider>
+	</authentication-manager>
+	
+	<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<beans:property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+		<beans:property name="url" value="jdbc:mysql://localhost:3306/bestschema"/>
+		<beans:property name="username" value="root"/>
+		<beans:property name="password" value="jake"/>
+	</beans:bean>
+	
+</beans:beans>
