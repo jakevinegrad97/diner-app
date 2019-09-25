@@ -40,9 +40,7 @@ public class UserController {
 				"Our food is considered among the best in the world.",
 				"Our head chef will make sure your food is cooked to the highest of standards.",
 				"Many distinguished guests regularly come here.",
-				"Ronaldo ate here moments before Real Madrid won the Champions League Final.",
-				"So make fine dining great again!",
-				"And always eat your pizza like this, or don't bother coming."
+				"Ronaldo ate here moments before Real Madrid won the Champions League Final."
 				);
 		if (y == messages.size()) {
 			y = 0;
@@ -82,38 +80,10 @@ public class UserController {
 
 	@Autowired
 	private UserService service;
-
-	static final String AB = "abcdefghijklmnopqrstuvwxyz1234567890";
-	static SecureRandom rnd = new SecureRandom();
-
-	String randomString( int len ){
-	   StringBuilder sb = new StringBuilder( len );
-	   for( int i = 0; i < len; i++ ) 
-	      sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
-	   return sb.toString();
-	}
 	
 	@RequestMapping("/")
 	public String home(Model model) throws InterruptedException {
 		Thread.sleep(500);
-		int volume = (int)(Math.ceil(Math.random() * 32));
-		String stringVolume = "";
-		if(volume < 10) {
-			stringVolume = "0" + volume;
-		} else {
-			stringVolume = String.valueOf(volume);
-		}
-		String link = "https://libraryofbabel.info/book.cgi?"
-					+ randomString((int)(Math.ceil(Math.random() * 3600)))
-					+ "-w"
-					+ (int)(Math.ceil(Math.random() * 4))
-					+ "-s"
-					+ (int)(Math.ceil(Math.random() * 5))
-					+ "-v"
-					+ stringVolume
-					+ ":"
-					+ (int)(Math.ceil(Math.random() * 410));
-		model.addAttribute("babel", link);
 		model.addAttribute("homeImage", randomImage());
 		model.addAttribute("myMessage", message());
 		return "index";
