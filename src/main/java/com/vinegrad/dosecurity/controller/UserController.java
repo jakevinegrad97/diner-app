@@ -65,11 +65,7 @@ public class UserController {
 				// messi
 				"https://i2.wp.com/www.soccernation.com/wp-content/uploads/2016/08/breakfast-e1472147967165.jpeg?fit=634%2C515&ssl=1",
 				// ronaldo
-				"https://www.ronaldo7.net/faq/cristiano-ronaldo-eat.jpg",
-				// trump
-				"https://thenypost.files.wordpress.com/2018/03/trump-eating.jpg?quality=90&strip=all&w=618&h=410&crop=1",
-				// trump pizza
-				"https://media.giphy.com/media/pRuGbrRyNgajK/giphy.gif");
+				"https://www.ronaldo7.net/faq/cristiano-ronaldo-eat.jpg");
 
 		if (x == images.size()) {
 			x = 0;
@@ -139,9 +135,6 @@ public class UserController {
 			username = ((UserDetails) principal).getUsername();
 		} else {
 			username = principal.toString();
-		}
-		if(username.equals("kurtzouma")) {
-			return "kurt";
 		}
 		model.addAttribute("homeImage", randomImage());
 		model.addAttribute("myMessage", message());
